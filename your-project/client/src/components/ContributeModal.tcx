@@ -1,0 +1,51 @@
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import ContributeForm from './ContributeForm';
+
+interface ContributeModalProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  campaignId: number;
+  campaignTitle: string;
+  goal: string;
+  amountRaised: string;
+}
+
+export default function ContributeModal({
+  open,
+  onOpenChange,
+  campaignId,
+  campaignTitle,
+  goal,
+  amountRaised,
+}: ContributeModalProps) {
+  const handleSuccess = () => {
+    onOpenChange(false);
+  };
+
+  const handleCancel = () => {
+    onOpenChange(false);
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-lg">
+        <DialogHeader>
+          <DialogTitle>Contribute to Campaign</DialogTitle>
+        </DialogHeader>
+        <ContributeForm
+          campaignId={campaignId}
+          campaignTitle={campaignTitle}
+          goal={goal}
+          amountRaised={amountRaised}
+          onSuccess={handleSuccess}
+          onCancel={handleCancel}
+        />
+      </DialogContent>
+    </Dialog>
+  );
+}
